@@ -23,5 +23,18 @@ const shuffleArray = (array) => {
     const j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
   }
+  return array;
 };
-export {getRandomInt, getRandomFloat, shuffleArray};
+
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+const  numDecline = (number, array) => {
+  number = Math.abs(number) % 100;
+  const num = number % 10;
+  if(number > 10 && number < 20) {return array[2];}
+  if(num > 1 && num < 5) {return array[1];}
+  if(num === 1) {return array[0];}
+  return array[2];
+};
+
+export { getRandomInt, getRandomFloat, shuffleArray, numDecline, isEscapeKey };

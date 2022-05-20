@@ -1,12 +1,13 @@
-import {getRandomInt, getRandomFloat, shuffleArray} from './utils.js';
+import { getRandomInt, getRandomFloat, shuffleArray } from './utils.js';
 
 const AVATAR = [
-  '1',
-  '2',
-  '3',
-  '4',
-  '5',
-  '6',
+  '01',
+  '02',
+  '03',
+  '04',
+  '05',
+  '06',
+  '07'
 ];
 const TITLES = [
   'Квартира',
@@ -63,7 +64,7 @@ const LNG_MAX = 139.80000;
 
 const addOffer = () => ({
   author: {
-    avatar: `img/avatars/${AVATAR}.webp`,
+    avatar: `img/avatars/user${AVATAR[getRandomInt(0, (AVATAR.length -1))]}.png`
   },
   offer: {
     title: TITLES[getRandomInt(0, (TITLES.length -1))],
@@ -74,8 +75,8 @@ const addOffer = () => ({
     guests: getRandomInt(1, 6),
     checkin: CHECKINS[getRandomInt(0, (CHECKINS.length -1))],
     checkout: CHECKOUTS[getRandomInt(0, (CHECKOUTS.length -1))],
-    features: shuffleArray(FEATURES).slice(0, getRandomInt(0, FEATURES.length)),
-    description: shuffleArray(DESCRIPTION).slice(0, getRandomInt(0, DESCRIPTION.length)),
+    features: shuffleArray(FEATURES).slice(0, getRandomInt(0, FEATURES.length -1)),
+    description: shuffleArray(DESCRIPTION).slice(0, getRandomInt(0, DESCRIPTION.length -1)),
     photos: PHOTOS[getRandomInt(0, (PHOTOS.length -1))],
   },
   location: {
@@ -86,6 +87,6 @@ const addOffer = () => ({
 
 const offers = Array.from({length: 10}, addOffer);
 
-export {offers};
+export { offers };
 
 
