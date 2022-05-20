@@ -1,12 +1,13 @@
 import { numDecline } from './utils.js';
 
-const card = document.querySelector('#card').content.querySelector('.popup');
+const card = document.querySelector('#card').content;
 
 const TypeOfHouse = {
   flat: 'Квартира',
   bungalow: 'Бунгало',
   house: 'Дом',
   palace: 'Дворец',
+  hotel: 'Отель'
 };
 
 const renderImages = (container, sources) => {
@@ -17,7 +18,7 @@ const renderImages = (container, sources) => {
   sources.forEach((source) => {
     const newPhoto = popupPhoto.cloneNode(true);
     newPhoto.src = source;
-    fragmentPhoto.append(newPhoto);
+    fragmentPhoto.appendChild(newPhoto);
   });
   return fragmentPhoto;
 };
