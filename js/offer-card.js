@@ -10,7 +10,7 @@ const TypeOfHouse = {
   hotel: 'Отель'
 };
 
-const renderImages = (container, sources) => {
+const renderImages = (sources, container) => {
   const popupPhoto = container.querySelector('.popup__photo');
   container.innerHTML = '';
   const fragmentPhoto = document.createDocumentFragment();
@@ -94,7 +94,7 @@ const renderCard = ({ author, offer }) => {
 
   const photoContainer = offerCard.querySelector('.popup__photos');
   if (offer.photos.length > 0) {
-    photoContainer.appendChild(renderImages(photoContainer, offer.photos));
+    photoContainer.appendChild(renderImages(offer.photos, photoContainer));
   } else {
     photoContainer.remove();
   }
