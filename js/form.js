@@ -1,7 +1,5 @@
-import { address } from "./map.js";
-
 const TypeOfHouse = {
-  'bungalow': 0,
+  'bungalow': 100,
   'flat': 1000,
   'hotel': 3000,
   'house': 5000,
@@ -85,8 +83,37 @@ const validateMinPrice = () => {
 typeHousing.addEventListener('change', validateMinPrice);
 
 const checkMinPrice = () => Number(price.value) >= Number(price.placeholder);
-const getPriceErrorMessage = () => `Минимальная цена ${price.placeholder} рублей`;
+const getPriceErrorMessage = () => `Минимальная цена ${price.placeholder} руб`;
 pristine.addValidator(price, checkMinPrice, getPriceErrorMessage);
+
+// NoUiSlider
+const sliderElement = adForm.querySelector('.ad-form__slider');
+
+noUiSlider.create(sliderElement, {
+  range: {
+    min: 0,
+    max: 100000,
+  },
+  start: 0,
+  step: 100,
+  connect: 'lower',
+  format: {
+    to: function (value) {
+      if (Number.isInteger(value)) {
+        return value.toFixed(0);
+      }
+      return value.toFixed(0);
+    },
+    from: function (value) {
+      return parseFloat(value);
+    },
+  },
+});
+
+sliderElement.noUiSlider.on('slide', () => {
+  price.value = sliderElement.noUiSlider.get();
+  pristine.validate(price);
+});
 
 adForm.addEventListener('submit', (evt) => {
   if (!pristine.validate()) {

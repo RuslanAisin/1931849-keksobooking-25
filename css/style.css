@@ -1033,3 +1033,8 @@ fieldset {
   color: red;
   padding: 2px;
 }
+
+.ad-form__slider {
+  margin: 4px;
+  width: calc(100% - 25px);;
+}

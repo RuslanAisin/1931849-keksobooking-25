@@ -1,14 +1,16 @@
 import { getRandomInt, getRandomFloat, shuffleArray } from './utils.js';
 
-const AVATAR = [
-  '01',
-  '02',
-  '03',
-  '04',
-  '05',
-  '06',
-  '07'
-];
+const offerCount = 10;
+const AVATAR = [];
+
+const getRandomImg = (count = 10) => {
+  while (AVATAR.length < count) {
+    const index = getRandomInt(1, 11);
+    if (!AVATAR.includes(index)) {
+      AVATAR.push(index < 10 ? `0${index}` : index);
+    }
+  }
+};
 const TITLES = [
   'Квартира',
   'Комната',
@@ -64,15 +66,15 @@ const LNG_MAX = 139.80000;
 
 const addOffer = () => ({
   author: {
-    avatar: `img/avatars/user${AVATAR[getRandomInt(0, (AVATAR.length -1))]}.png`
+    avatar: `img/avatars/user${getRandomImg(), AVATAR[0]}.png`
   },
   offer: {
     title: TITLES[getRandomInt(0, (TITLES.length -1))],
     address: `${getRandomFloat(LAT_MIN, LAT_MAX, 5)}, ${getRandomFloat(LNG_MIN, LNG_MAX, 5)}`,
-    price: getRandomInt(100, 10000),
+    price: getRandomInt(1000, 10000),
     type: TYPES[getRandomInt(0, (TYPES.length -1))],
-    rooms: getRandomInt(1, 6),
-    guests: getRandomInt(1, 3),
+    rooms: getRandomInt(0, 3),
+    guests: getRandomInt(0, 3),
     checkin: CHECKINS[getRandomInt(0, (CHECKINS.length -1))],
     checkout: CHECKOUTS[getRandomInt(0, (CHECKOUTS.length -1))],
     features: shuffleArray(FEATURES).slice(0, getRandomInt(0, FEATURES.length -1)),
@@ -85,7 +87,7 @@ const addOffer = () => ({
   },
 });
 
-const offers = Array.from({length: 10}, addOffer);
+const offers = Array.from({length: offerCount}, addOffer);
 
 export { offers };
 
