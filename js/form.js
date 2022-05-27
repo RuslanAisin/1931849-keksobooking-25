@@ -1,3 +1,5 @@
+import { resetMainPin } from './map.js';
+
 const TypeOfHouse = {
   'bungalow': 100,
   'flat': 1000,
@@ -24,6 +26,11 @@ const roomNumber = adForm.querySelector('#room_number');
 const capacity = adForm.querySelector('#capacity');
 const guestNumber = capacity.querySelectorAll('option');
 const time = adForm.querySelector('.ad-form__element--time');
+const avatar = document.querySelector('#avatar');
+const photos = document.querySelector('#images');
+const preview = document.querySelector('.ad-form-header__preview');
+const avatarImg = preview.querySelector('img');
+const resetBtn = document.querySelector('.ad-form__reset');
 
 // on/off form
 const setDisabledState = () => {
@@ -124,4 +131,16 @@ adForm.addEventListener('submit', (evt) => {
   }
 });
 
-export { setActiveState, setInactiveState};
+const resetForm = () => {
+  adForm.reset();
+  avatar.files.value = 'img/muffin-grey.svg';
+  avatarImg.src = 'img/muffin-grey.svg';
+  photos.files.value='';
+  const userPhotos = document.querySelectorAll('.photo');
+  userPhotos.forEach((element) => element.remove());
+  resetMainPin();
+};
+
+resetBtn.addEventListener('click', resetForm);
+
+export { setActiveState, setInactiveState, resetForm};
